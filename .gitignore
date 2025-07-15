@@ -36,6 +36,16 @@ static/
 .env.*
 !.env.example
 
+# Secrets and credentials
+secrets/
+!secrets/README.md
+!secrets/*.example
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
 # Virtual environments
 venv/
 env/
