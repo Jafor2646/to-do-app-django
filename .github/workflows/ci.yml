@@ -72,6 +72,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+      with:
+        clean: true
+        fetch-depth: 0
     
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -88,6 +91,27 @@ jobs:
         ls -la package.json
         npm ci --legacy-peer-deps
         echo "Dependencies installed successfully"
+
+    - name: Verify dependencies and clean install
+      working-directory: ./frontend
+      run: |
+        echo "Verifying critical dependencies..."
+        echo "clsx version:"
+        npm list clsx || echo "clsx not found"
+        echo "tailwind-merge version:"
+        npm list tailwind-merge || echo "tailwind-merge not found"
+        
+        echo "Node modules structure:"
+        ls -la node_modules/ | head -10
+
+    - name: Clear build cache
+      working-directory: ./frontend
+      run: |
+        echo "Clearing any existing build cache..."
+        rm -rf node_modules/.vite
+        rm -rf dist
+        rm -rf .vite
+        echo "Cache cleared"
     
     - name: Verify project structure
       working-directory: ./frontend
@@ -139,6 +163,31 @@ EOF
         fi
         
         echo "Build requirements verified ✅"
+
+    - name: Debug import statements
+      working-directory: ./frontend
+      run: |
+        echo "Checking import statements in UI components..."
+        echo "=== input.jsx imports ==="
+        grep -n "@/lib/utils" src/components/ui/input.jsx || echo "No imports found"
+        echo "=== All UI component imports ==="
+        find src/components/ui -name "*.jsx" -exec grep -l "@/lib/utils" {} \; | xargs -I {} sh -c 'echo "File: {}"; grep "@/lib/utils" "{}"'
+        echo "=== Checking for imports without .js extension ==="
+        find src -name "*.jsx" -o -name "*.js" | xargs grep -l 'from "@/lib/utils"[^.]' || echo "No problematic imports found"
+
+    - name: Fix any remaining import issues
+      working-directory: ./frontend
+      run: |
+        echo "Ensuring all imports have explicit .js extensions..."
+        
+        # Fix any remaining imports that don't have .js extension
+        find src -name "*.jsx" -o -name "*.js" | xargs sed -i 's|from "@/lib/utils"|from "@/lib/utils.js"|g'
+        
+        echo "Verifying all imports after fix:"
+        find src -name "*.jsx" -o -name "*.js" | xargs grep -l "@/lib/utils" | while read file; do
+          echo "File: $file"
+          grep "@/lib/utils" "$file"
+        done
     
     - name: Run linting
       working-directory: ./frontend
