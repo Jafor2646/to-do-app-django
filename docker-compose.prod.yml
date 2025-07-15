@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: tododb
       POSTGRES_USER: todouser
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-todopass123}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-CHANGE_ME_IN_PRODUCTION}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
@@ -42,7 +42,7 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=${SECRET_KEY}
-      - DATABASE_URL=postgresql://todouser:${POSTGRES_PASSWORD:-todopass123}@db:5432/tododb
+      - DATABASE_URL=postgresql://todouser:${POSTGRES_PASSWORD:-CHANGE_ME_IN_PRODUCTION}@db:5432/tododb
       - REDIS_URL=redis://redis:6379/0
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost:3000}

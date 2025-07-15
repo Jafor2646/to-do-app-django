@@ -134,6 +134,7 @@ A modern, feature-rich To-Do application built with Django REST Framework and Re
 - **[Deployment Guide](docs/DEPLOYMENT.md)** - Multiple deployment strategies
 - **[Development Guide](docs/DEVELOPMENT.md)** - Setup and contribution guidelines
 - **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)** - Common issues and solutions
+- **[Security Guide](docs/SECURITY.md)** - Security best practices and configuration
 
 ## 📚 API Documentation
 
