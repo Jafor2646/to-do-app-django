@@ -1,6 +1,21 @@
 # 🚀 Full-Stack To-Do Application
 
+![CI/CD Status](https://github.com/Jafor2646/to-do-app-django/workflows/CI%2FCD%20Pipeline/badge.svg)
+![Security Scan](https://github.com/Jafor2646/to-do-app-django/workflows/Deploy%20to%20Docker%20Hub/badge.svg)
+
 A modern, feature-rich To-Do application built with Django REST Framework and React, featuring JWT authentication, drag-and-drop functionality, real-time filtering, and a beautiful UI with Tailwind CSS and shadcn/ui components.
+
+## 🔄 CI/CD Pipeline
+
+This project includes a comprehensive CI/CD pipeline with:
+
+- **✅ Automated Testing**: Backend (Django) + Frontend (React) tests
+- **🛡️ Security Scanning**: Trivy vulnerability scanner with SARIF reports
+- **🔍 Code Quality**: ESLint, build verification, import validation
+- **🐳 Docker Support**: Automated image building and optional Docker Hub deployment
+- **📊 Coverage Reports**: Automated code coverage tracking with Codecov
+
+**[📋 Full CI/CD Setup Guide](docs/CI_CD_SETUP.md)**
 
 ## ✨ Features
 
