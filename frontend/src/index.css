@@ -3,70 +3,1472 @@
 @tailwind utilities;
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  --radius: 0.75rem;
+  
+  /* Modern colorful theme - Dark Cyan/Black/White */
+  --background: 248 250 252;
+  --foreground: 0 0 0; /* Black text */
+  --card: 21 94 117; /* Dark cyan */
+  --card-foreground: 255 255 255; /* White text on cards */
+  --popover: 255 255 255; /* White popover background */
+  --popover-foreground: 0 0 0; /* Black text on popovers */
+  --primary: 21 94 117; /* Dark cyan primary */
+  --primary-foreground: 255 255 255; /* White text on primary */
+  --secondary: 148 163 184; /* Gray */
+  --secondary-foreground: 0 0 0; /* Black text on secondary */
+  --muted: 241 245 249; /* Light gray */
+  --muted-foreground: 0 0 0; /* Black text on muted */
+  --accent: 21 94 117; /* Dark cyan accent */
+  --accent-foreground: 255 255 255; /* White text on accent */
+  --destructive: 239 68 68; /* Red for errors */
+  --destructive-foreground: 255 255 255; /* White text on destructive */
+  --border: 21 94 117; /* Dark cyan borders */
+  --input: 255 255 255; /* White input background */
+  --ring: 21 94 117; /* Dark cyan focus ring */
+  --chart-1: 34 197 94; /* Green */
+  --chart-2: 21 94 117; /* Dark cyan */
+  --chart-3: 168 85 247; /* Purple */
+  --chart-4: 21 94 117; /* Dark cyan instead of yellow */
+  --chart-5: 239 68 68; /* Red */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-a:hover {
-  color: #535bf2;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  color: hsl(var(--foreground));
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Modern input styling */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="date"], 
+textarea, 
+select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="date"]:focus, 
+textarea:focus, 
+select:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Comprehensive input text color fixes */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="date"], 
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea, 
+select,
+.input, 
+[data-testid="input"],
+[role="textbox"],
+[role="combobox"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+  color: #666666 !important;
+  opacity: 1 !important;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #666666 !important;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #666666 !important;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #666666 !important;
+}
+
+/* Select dropdown styling */
+select option {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Remove any yellow/warning styles */
+input[data-invalid],
+input.invalid,
+input:invalid {
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
+/* Autocomplete styling override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+}
+
+/* Force white background for all input components */
+.input, 
+input, 
+textarea, 
+select,
+[data-testid="input"],
+[role="textbox"],
+[role="combobox"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.input:focus, 
+input:focus, 
+textarea:focus, 
+select:focus,
+[data-testid="input"]:focus,
+[role="textbox"]:focus,
+[role="combobox"]:focus {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Ensure shadcn/ui components use white backgrounds */
+.ui-input,
+.ui-textarea,
+.ui-select {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Button styling */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border-radius: var(--radius);
+  border: none;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+/* Force all button text to be black */
+button,
+.btn,
+[class*="button"] {
+  color: black !important;
+}
+
+/* Specific button overrides */
+button span,
+.btn span,
+[class*="button"] span {
+  color: black !important;
+}
+
+/* shadcn/ui Button component overrides */
+.inline-flex.items-center.justify-center,
+[class*="inline-flex"][class*="items-center"][class*="justify-center"] {
+  color: black !important;
+}
+
+/* Primary buttons with cyan background */
+.bg-cyan-600,
+.bg-cyan-700,
+.hover\\:bg-cyan-600:hover,
+.hover\\:bg-cyan-700:hover {
+  color: black !important;
+}
+
+/* Link text colors */
+a {
+  color: black !important;
+}
+
+a:hover {
+  color: #374151 !important; /* gray-700 */
+}
+
+/* Ensure underlined links are visible */
+.underline {
+  text-decoration-color: black !important;
+}
+
+/* Card styling */
+.card,
+[data-testid="card"],
+div[class*="card"] {
+  background: hsl(21 94 117) !important;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+  color: hsl(248 250 252) !important;
+}
+
+.card:hover,
+[data-testid="card"]:hover,
+div[class*="card"]:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  background: hsl(22 78 99) !important;
+}
+
+/* Ensure all card text is white */
+.card *,
+[data-testid="card"] *,
+div[class*="card"] * {
+  color: hsl(248 250 252) !important;
+}
+
+/* Override any specific text colors in cards */
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6,
+.card p, .card span, .card div {
+  color: hsl(248 250 252) !important;
+}
+
+/* Shadcn/ui specific card styling */
+.ui-card,
+[class*="card"],
+[class*="Card"] {
+  background: hsl(21 94 117) !important;
+  color: hsl(248 250 252) !important;
+}
+
+/* Task card specific styling */
+.task-card,
+[data-task-card],
+.todo-card {
+  background: hsl(21 94 117) !important;
+  color: hsl(248 250 252) !important;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+
+/* Dashboard card styling */
+.dashboard .card,
+[data-dashboard] .card,
+.dashboard-card {
+  background: hsl(21 94 117) !important;
+  color: hsl(248 250 252) !important;
+}
+
+/* Remove the old light/dark theme selector */
+
+/* Custom properties for radius */
+:root {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Remove old dark theme variables */
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
   }
-  a:hover {
-    color: #747bff;
+  
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    color: hsl(var(--foreground));
   }
-  button {
-    background-color: #f9f9f9;
+  
+  /* Enhanced scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
   }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: var(--radius);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: var(--radius);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+}
+
+/* Responsive design for laptops and larger screens */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  /* Make cards have better spacing on larger screens */
+  .grid {
+    gap: 2rem;
+  }
+  
+  /* Better form layouts for laptops */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .form-grid .form-full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Improved gradient backgrounds */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+}
+
+/* Priority indicators */
+.priority-high {
+  border-left: 4px solid hsl(var(--destructive));
+  background: linear-gradient(135deg, #fee2e2, #fef2f2);
+}
+
+.priority-medium {
+  border-left: 4px solid hsl(var(--chart-4));
+  background: linear-gradient(135deg, #fef3c7, #fffbeb);
+}
+
+.priority-low {
+  border-left: 4px solid hsl(var(--chart-1));
+  background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+}
+
+/* Status indicators */
+.status-pending {
+  background: linear-gradient(135deg, #e0e7ff, #f0f9ff);
+}
+
+.status-in-progress {
+  background: linear-gradient(135deg, #fed7aa, #fef3c7);
+}
+
+.status-completed {
+  background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced shadows */
+.shadow-soft {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-medium {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-large {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Comprehensive color scheme fixes - Remove all yellow, use dark cyan/black/white */
+
+/* Override all yellow/amber colors */
+.text-yellow-400,
+.text-yellow-500,
+.text-yellow-600,
+.text-yellow-700,
+.text-amber-400,
+.text-amber-500,
+.text-amber-600,
+.text-amber-700,
+[class*="text-yellow"],
+[class*="text-amber"],
+[class*="yellow"],
+[class*="amber"] {
+  color: #000000 !important;
+}
+
+/* Border color fixes */
+.border-yellow-400,
+.border-yellow-500,
+.border-yellow-600,
+.border-amber-400,
+.border-amber-500,
+.border-amber-600,
+[class*="border-yellow"],
+[class*="border-amber"] {
+  border-color: hsl(21 94 117) !important; /* Dark cyan */
+}
+
+/* Background color fixes */
+.bg-yellow-400,
+.bg-yellow-500,
+.bg-yellow-600,
+.bg-amber-400,
+.bg-amber-500,
+.bg-amber-600,
+[class*="bg-yellow"],
+[class*="bg-amber"] {
+  background-color: hsl(21 94 117) !important; /* Dark cyan */
+  color: #ffffff !important;
+}
+
+/* Icon color fixes */
+svg,
+.icon,
+[data-testid*="icon"],
+.lucide,
+[class*="icon"],
+i[class*="fa"],
+i[class*="icon"] {
+  color: #1e293b !important; /* Dark slate for better visibility */
+  fill: #1e293b !important;
+  stroke: #1e293b !important;
+  transition: color 0.2s ease !important;
+}
+
+/* Icons in different contexts */
+
+/* Card icons - use contrasting colors */
+.card svg,
+.card .icon,
+.card [data-testid*="icon"],
+.card .lucide,
+[data-testid="card"] svg,
+[data-testid="card"] .icon,
+[class*="card"] svg,
+[class*="card"] .icon {
+  color: #f8fafc !important; /* Light gray for better contrast on dark cyan */
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+
+/* Button icons - inherit button color but with fallbacks */
+button svg,
+button .icon,
+button .lucide,
+.btn svg,
+.btn .icon {
+  color: inherit !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Primary button icons */
+button[class*="primary"] svg,
+button[class*="bg-"] svg,
+.btn-primary svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Outline button icons */
+button[variant="outline"] svg,
+button[class*="outline"] svg,
+.btn-outline svg {
+  color: #1e293b !important;
+  fill: #1e293b !important;
+  stroke: #1e293b !important;
+}
+
+/* Navigation icons */
+nav svg,
+.navbar svg,
+.navigation svg,
+header svg,
+.header svg {
+  color: #334155 !important; /* Darker slate */
+  fill: #334155 !important;
+  stroke: #334155 !important;
+}
+
+/* Status and action icons with semantic colors */
+.icon-success,
+.icon-completed,
+[data-status="completed"] svg,
+.success svg {
+  color: #16a34a !important; /* Green */
+  fill: #16a34a !important;
+  stroke: #16a34a !important;
+}
+
+.icon-warning,
+.icon-pending,
+[data-status="pending"] svg,
+.warning svg {
+  color: #ea580c !important; /* Orange instead of yellow */
+  fill: #ea580c !important;
+  stroke: #ea580c !important;
+}
+
+.icon-error,
+.icon-danger,
+[data-status="error"] svg,
+.error svg,
+.danger svg {
+  color: #dc2626 !important; /* Red */
+  fill: #dc2626 !important;
+  stroke: #dc2626 !important;
+}
+
+.icon-info,
+.icon-primary,
+[data-status="info"] svg,
+.info svg {
+  color: #0369a1 !important; /* Blue */
+  fill: #0369a1 !important;
+  stroke: #0369a1 !important;
+}
+
+/* Priority icons */
+.priority-high svg,
+[data-priority="high"] svg {
+  color: #dc2626 !important; /* Red for high priority */
+  fill: #dc2626 !important;
+  stroke: #dc2626 !important;
+}
+
+.priority-medium svg,
+[data-priority="medium"] svg {
+  color: #ea580c !important; /* Orange for medium priority */
+  fill: #ea580c !important;
+  stroke: #ea580c !important;
+}
+
+.priority-low svg,
+[data-priority="low"] svg {
+  color: #16a34a !important; /* Green for low priority */
+  fill: #16a34a !important;
+  stroke: #16a34a !important;
+}
+
+/* Interactive icon states */
+svg:hover,
+.icon:hover,
+button svg:hover {
+  opacity: 0.8 !important;
+}
+
+.icon-clickable,
+[data-clickable] svg,
+button svg {
+  cursor: pointer !important;
+}
+
+/* Comprehensive text color fixes - everything dark */
+
+/* All text elements to dark colors */
+*,
+*::before,
+*::after {
+  color: #1e293b !important; /* Dark slate as default */
+}
+
+/* Specific text elements */
+h1, h2, h3, h4, h5, h6 {
+  color: #0f172a !important; /* Very dark slate for headings */
+  font-weight: 600 !important;
+}
+
+p, span, div, li, td, th {
+  color: #334155 !important; /* Medium slate for body text */
+}
+
+/* Form elements text */
+label,
+.label,
+[data-testid="label"],
+.form-label {
+  color: #1e293b !important; /* Dark slate for labels */
+  font-weight: 500 !important;
+}
+
+.form-description,
+.help-text,
+.text-sm,
+small {
+  color: #64748b !important; /* Lighter slate for descriptions */
+}
+
+/* Override card text to white (exception to dark text rule) */
+.card,
+.card *,
+[data-testid="card"],
+[data-testid="card"] *,
+[class*="card"],
+[class*="card"] * {
+  color: #f8fafc !important; /* Light text on dark cyan cards */
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+  color: #ffffff !important; /* White headings in cards */
+}
+
+/* Navigation text */
+nav,
+nav *,
+.navbar,
+.navbar *,
+header,
+header * {
+  color: #1e293b !important;
+}
+
+/* Link colors */
+a,
+.link,
+[href] {
+  color: #0369a1 !important; /* Blue for links */
+  text-decoration: none !important;
+}
+
+a:hover,
+.link:hover,
+[href]:hover {
+  color: #0284c7 !important; /* Lighter blue on hover */
+  text-decoration: underline !important;
+}
+
+/* Button text colors */
+button {
+  color: #ffffff !important; /* Default white text for buttons */
+  font-weight: 500 !important;
+}
+
+button[variant="outline"],
+button[class*="outline"],
+.btn-outline {
+  color: #1e293b !important; /* Dark text for outline buttons */
+}
+
+button[variant="ghost"],
+button[class*="ghost"],
+.btn-ghost {
+  color: #334155 !important; /* Medium dark for ghost buttons */
+}
+
+/* Input text colors - black for maximum contrast */
+input,
+textarea,
+select {
+  color: #000000 !important; /* Pure black for input text */
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+  color: #64748b !important; /* Slate for placeholders */
+}
+
+/* Table text */
+table,
+table * {
+  color: #334155 !important;
+}
+
+th {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+/* Modal and dialog text */
+.modal,
+.dialog,
+[role="dialog"] {
+  color: #1e293b !important;
+}
+
+.modal *,
+.dialog *,
+[role="dialog"] * {
+  color: #334155 !important;
+}
+
+/* Override any remaining yellow/amber text */
+[class*="text-yellow"],
+[class*="text-amber"],
+[style*="color: yellow"],
+[style*="color: amber"] {
+  color: #1e293b !important;
+}
+
+/* Utility classes for consistent color usage */
+
+/* Text color utilities */
+.text-dark {
+  color: #1e293b !important;
+}
+
+.text-darker {
+  color: #0f172a !important;
+}
+
+.text-medium {
+  color: #334155 !important;
+}
+
+.text-light {
+  color: #64748b !important;
+}
+
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Icon color utilities */
+.icon-dark {
+  color: #1e293b !important;
+  fill: #1e293b !important;
+  stroke: #1e293b !important;
+}
+
+.icon-light {
+  color: #f8fafc !important;
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+
+.icon-primary {
+  color: #0369a1 !important;
+  fill: #0369a1 !important;
+  stroke: #0369a1 !important;
+}
+
+.icon-success {
+  color: #16a34a !important;
+  fill: #16a34a !important;
+  stroke: #16a34a !important;
+}
+
+.icon-warning {
+  color: #ea580c !important;
+  fill: #ea580c !important;
+  stroke: #ea580c !important;
+}
+
+.icon-danger {
+  color: #dc2626 !important;
+  fill: #dc2626 !important;
+  stroke: #dc2626 !important;
+}
+
+/* Background utilities with proper text colors */
+.bg-primary {
+  background-color: hsl(21 94 117) !important;
+  color: #ffffff !important;
+}
+
+.bg-secondary {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+.bg-success {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+}
+
+.bg-warning {
+  background-color: #ea580c !important;
+  color: #ffffff !important;
+}
+
+.bg-danger {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+/* Border utilities */
+.border-primary {
+  border-color: hsl(21 94 117) !important;
+}
+
+.border-dark {
+  border-color: #1e293b !important;
+}
+
+.border-light {
+  border-color: #e2e8f0 !important;
+}
+
+/* Focus states for all interactive elements */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  outline: 2px solid hsl(21 94 117) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px hsl(21 94 117 / 0.2) !important;
+}
+
+/* Ensure all interactive elements have proper contrast */
+[role="button"],
+[tabindex="0"],
+.clickable {
+  color: #1e293b !important;
+  transition: all 0.2s ease !important;
+}
+
+[role="button"]:hover,
+[tabindex="0"]:hover,
+.clickable:hover {
+  color: #0f172a !important;
+}
+
+/* Special handling for filter and search elements */
+.filter-container,
+.search-container,
+[data-testid*="filter"],
+[data-testid*="search"] {
+  color: #1e293b !important;
+}
+
+.filter-container *,
+.search-container *,
+[data-testid*="filter"] *,
+[data-testid*="search"] * {
+  color: #334155 !important;
+}
+
+/* Dropdown and select option styling */
+option,
+[role="option"] {
+  color: #1e293b !important;
+  background: #ffffff !important;
+}
+
+option:hover,
+[role="option"]:hover,
+option:focus,
+[role="option"]:focus {
+  background: hsl(21 94 117 / 0.1) !important;
+  color: #0f172a !important;
+}
+
+/* Loading states */
+.loading-text,
+.skeleton-text,
+[data-loading] {
+  color: #64748b !important;
+}
+
+/* Universal Card and Text Color Rules */
+
+/* ALL CARDS - Force cyan background and white text */
+[data-sonner-toast],
+[data-radix-toast],
+.card,
+[data-testid="card"],
+[class*="card"],
+[class*="Card"],
+.ui-card,
+.dashboard-card,
+.login-card,
+.register-card,
+.auth-card,
+.task-card,
+.filter-card,
+.stats-card,
+.content-card {
+  background: hsl(21 94 117) !important; /* Dark cyan */
+  color: #ffffff !important; /* White text */
+  border-color: hsl(21 94 117) !important;
+}
+
+/* ALL CARD CONTENT - White text */
+.card *,
+[data-testid="card"] *,
+[class*="card"] *,
+[class*="Card"] *,
+.ui-card *,
+.dashboard-card *,
+.login-card *,
+.register-card *,
+.auth-card *,
+.task-card *,
+.filter-card *,
+.stats-card *,
+.content-card * {
+  color: #ffffff !important;
+}
+
+/* Card headers, titles, and content */
+.card-header,
+.card-title,
+.card-description,
+.card-content,
+.card-footer,
+[class*="CardHeader"],
+[class*="CardTitle"],
+[class*="CardDescription"],
+[class*="CardContent"],
+[class*="CardFooter"] {
+  color: #ffffff !important;
+}
+
+/* ALL DIV AND PARAGRAPH TEXT - Black (except in cards) */
+div:not(.card):not([class*="card"]):not(.dashboard-card):not(.login-card):not(.register-card),
+p:not(.card p):not([class*="card"] p):not(.dashboard-card p):not(.login-card p):not(.register-card p),
+span:not(.card span):not([class*="card"] span):not(.dashboard-card span):not(.login-card span):not(.register-card span),
+h1:not(.card h1):not([class*="card"] h1):not(.dashboard-card h1):not(.login-card h1):not(.register-card h1),
+h2:not(.card h2):not([class*="card"] h2):not(.dashboard-card h2):not(.login-card h2):not(.register-card h2),
+h3:not(.card h3):not([class*="card"] h3):not(.dashboard-card h3):not(.login-card h3):not(.register-card h3),
+h4:not(.card h4):not([class*="card"] h4):not(.dashboard-card h4):not(.login-card h4):not(.register-card h4),
+h5:not(.card h5):not([class*="card"] h5):not(.dashboard-card h5):not(.login-card h5):not(.register-card h5),
+h6:not(.card h6):not([class*="card"] h6):not(.dashboard-card h6):not(.login-card h6):not(.register-card h6),
+li:not(.card li):not([class*="card"] li):not(.dashboard-card li):not(.login-card li):not(.register-card li),
+td:not(.card td):not([class*="card"] td):not(.dashboard-card td):not(.login-card td):not(.register-card td),
+th:not(.card th):not([class*="card"] th):not(.dashboard-card th):not(.login-card th):not(.register-card th),
+label:not(.card label):not([class*="card"] label):not(.dashboard-card label):not(.login-card label):not(.register-card label) {
+  color: #000000 !important; /* Black text */
+}
+
+/* Specific page styling */
+
+/* Dashboard page */
+.dashboard,
+[data-page="dashboard"],
+.dashboard-page {
+  background: transparent;
+}
+
+.dashboard .card,
+[data-page="dashboard"] .card,
+.dashboard-page .card {
+  background: hsl(21 94 117) !important;
+  color: #ffffff !important;
+}
+
+/* Login page */
+.login,
+.login-page,
+[data-page="login"] {
+  background: transparent;
+}
+
+.login .card,
+.login-page .card,
+[data-page="login"] .card,
+.auth-card {
+  background: hsl(21 94 117) !important;
+  color: #ffffff !important;
+}
+
+/* Registration page */
+.register,
+.registration,
+.register-page,
+[data-page="register"] {
+  background: transparent;
+}
+
+.register .card,
+.registration .card,
+.register-page .card,
+[data-page="register"] .card {
+  background: hsl(21 94 117) !important;
+  color: #ffffff !important;
+}
+
+/* Form elements within cards */
+.card input,
+.card textarea,
+.card select,
+[class*="card"] input,
+[class*="card"] textarea,
+[class*="card"] select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+.card label,
+[class*="card"] label {
+  color: #ffffff !important;
+}
+
+/* Button styling in cards */
+.card button,
+[class*="card"] button {
+  color: #ffffff !important;
+}
+
+.card button:not([class*="outline"]),
+[class*="card"] button:not([class*="outline"]) {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: #ffffff !important;
+}
+
+.card button:hover,
+[class*="card"] button:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Badge styling in cards */
+.card .badge,
+[class*="card"] .badge {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Override any remaining muted or gray text in cards */
+.card .text-muted-foreground,
+.card .text-gray-500,
+.card .text-gray-600,
+[class*="card"] .text-muted-foreground,
+[class*="card"] .text-gray-500,
+[class*="card"] .text-gray-600 {
+  color: #e2e8f0 !important; /* Light gray for card secondary text */
+}
+
+/* Icons in cards */
+.card svg,
+.card .icon,
+[class*="card"] svg,
+[class*="card"] .icon {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Task list styling within cards */
+.task-item,
+.todo-item,
+[data-task] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Navigation and header - black text */
+nav,
+.navbar,
+header,
+.header {
+  background: transparent !important;
+}
+
+nav *,
+.navbar *,
+header *,
+.header * {
+  color: #000000 !important;
+}
+
+/* Main content areas - black text by default */
+main,
+.main,
+.content,
+.container {
+  color: #000000 !important;
+}
+
+/* Dialog and modal content */
+.dialog-content,
+.modal-content,
+[role="dialog"],
+[data-testid="dialog"] {
+  background: hsl(21 94 117) !important;
+  color: #ffffff !important;
+}
+
+.dialog-content *,
+.modal-content *,
+[role="dialog"] *,
+[data-testid="dialog"] * {
+  color: #ffffff !important;
+}
+
+/* Toast notifications */
+.toast,
+[data-sonner-toast],
+[data-radix-toast] {
+  background: hsl(21 94 117) !important;
+  color: #ffffff !important;
+  border-color: hsl(21 94 117) !important;
+}
+
+/* Fix remaining yellow text elements */
+.text-yellow-600,
+.text-yellow-500,
+.text-yellow-400,
+.text-yellow-300,
+.text-amber-600,
+.text-amber-500,
+.text-amber-400 {
+  color: white !important;
+}
+
+/* Specific fixes for dashboard text */
+.dashboard-card .text-xs,
+.dashboard-card p,
+.dashboard-card span {
+  color: rgb(229 231 235) !important; /* gray-200 */
+}
+
+/* Fix badge text */
+.badge,
+[class*="badge"] {
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Fix task list text */
+.task-list-empty,
+.no-tasks-message,
+[class*="no-tasks"],
+[class*="empty"] {
+  color: white !important;
+}
+
+/* Fix any remaining yellow/amber colors */
+*[class*="yellow"],
+*[class*="amber"] {
+  color: white !important;
+}
+
+/* Fix text in task components */
+.task-card,
+.task-item {
+  color: white !important;
+}
+
+.task-card *,
+.task-item * {
+  color: white !important;
+}
+
+/* Override any yellow backgrounds */
+*[class*="bg-yellow"],
+*[class*="bg-amber"] {
+  background-color: hsl(21 94 117) !important; /* dark cyan */
+}
+
+/* Fix input text selection highlighting - prevent yellow selection */
+input::selection,
+textarea::selection,
+*::selection {
+  background-color: #3b82f6 !important; /* blue-500 */
+  color: white !important;
+}
+
+input::-moz-selection,
+textarea::-moz-selection,
+*::-moz-selection {
+  background-color: #3b82f6 !important; /* blue-500 */
+  color: white !important;
+}
+
+/* Force all links to be black with proper specificity */
+a,
+a:link,
+a:visited,
+.font-medium,
+[class*="font-medium"] {
+  color: black !important;
+  text-decoration: underline !important;
+}
+
+a:hover,
+a:focus,
+.font-medium:hover,
+[class*="font-medium"]:hover {
+  color: #374151 !important; /* gray-700 */
+}
+
+/* Specific overrides for auth page links */
+.text-black a,
+.auth-card a,
+.login-card a,
+.register-card a {
+  color: black !important;
+  text-decoration: underline !important;
+}
+
+.text-black a:hover,
+.auth-card a:hover,
+.login-card a:hover,
+.register-card a:hover {
+  color: #374151 !important; /* gray-700 */
+}
+
+/* React Router Link component overrides */
+[class*="text-cyan"],
+[class*="text-blue"] {
+  color: black !important;
+}
+
+/* Force Link components to be black */
+.text-cyan-600,
+.text-cyan-700,
+.text-blue-600,
+.text-blue-700,
+.hover\\:text-cyan-600:hover,
+.hover\\:text-cyan-700:hover,
+.hover\\:text-blue-600:hover,
+.hover\\:text-blue-700:hover {
+  color: black !important;
+}
+
+.hover\\:text-gray-700:hover {
+  color: #374151 !important; /* gray-700 */
+}
+
+/* Input field text color fixes */
+input,
+textarea,
+.input,
+[class*="input"] {
+  color: black !important;
+}
+
+input:focus,
+textarea:focus,
+.input:focus,
+[class*="input"]:focus {
+  color: black !important;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; /* gray-500 */
+}
+
+/* Override any remaining yellow colors */
+.text-yellow-500,
+.text-yellow-600,
+.text-yellow-700,
+.text-amber-500,
+.text-amber-600,
+.text-amber-700 {
+  color: black !important;
+}
+
+/* Ultra-aggressive text color fixes for auth pages */
+.auth-card p,
+.login-card p,
+.register-card p,
+.auth-card span,
+.login-card span,
+.register-card span {
+  color: black !important;
+}
+
+/* Target specific text content */
+p:contains("Don't have an account"),
+p:contains("Already have an account"),
+span:contains("Don't have an account"),
+span:contains("Already have an account") {
+  color: black !important;
+}
+
+/* Force all paragraph text in card footers to be black */
+.flex.flex-col.space-y-4 p,
+.flex.flex-col.space-y-4 span {
+  color: black !important;
+}
+
+/* CardFooter specific overrides */
+[class*="CardFooter"] p,
+[class*="CardFooter"] span,
+.space-y-4 p,
+.space-y-4 span {
+  color: black !important;
+}
+
+/* More specific targeting */
+.text-sm.text-center,
+.text-sm.text-center span {
+  color: black !important;
+}
+
+/* Override any inherited colors */
+.auth-card *:not(button):not(input):not(a) {
+  color: black !important;
+}
+
+/* Specifically target the question text */
+p span:first-child {
+  color: black !important;
+}
+
+/* Last resort - target by text content pattern */
+p[style*="color"] span {
+  color: black !important;
+}
+
+/* Override any yellow text in auth cards */
+.auth-card .text-yellow-500,
+.auth-card .text-yellow-600,
+.auth-card .text-amber-500,
+.auth-card .text-amber-600,
+.login-card .text-yellow-500,
+.login-card .text-yellow-600,
+.login-card .text-amber-500,
+.login-card .text-amber-600,
+.register-card .text-yellow-500,
+.register-card .text-yellow-600,
+.register-card .text-amber-500,
+.register-card .text-amber-600 {
+  color: black !important;
+}
+
+/* Dialog styling for task form */
+[data-radix-dialog-content] {
+  background-color: hsl(188 91% 25%) !important; /* dark cyan */
+  color: white !important;
+}
+
+.dialog-header,
+[class*="DialogHeader"] {
+  background-color: hsl(188 91% 25%) !important; /* dark cyan */
+  color: white !important;
+}
+
+.dialog-title,
+[class*="DialogTitle"] {
+  color: white !important;
+}
+
+.dialog-description,
+[class*="DialogDescription"] {
+  color: rgb(229 231 235) !important; /* gray-200 */
+}
+
+/* Task form specific styling */
+.task-form-dialog {
+  background-color: hsl(188 91% 25%) !important; /* dark cyan */
+}
+
+.task-form-dialog * {
+  color: white !important;
+}
+
+.task-form-dialog label {
+  color: white !important;
+}
+
+.task-form-dialog input,
+.task-form-dialog textarea,
+.task-form-dialog select {
+  background-color: white !important;
+  color: black !important;
 }

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - SECRET_KEY=your-production-secret-key-change-this
+      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+    volumes:
+      - ./backend:/app
+      - backend_static:/app/staticfiles
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: todo-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    container_name: todo-db
+    environment:
+      - POSTGRES_DB=todoapp
+      - POSTGRES_USER=todouser
+      - POSTGRES_PASSWORD=todopassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  backend_static:
+
+networks:
+  todo-network:
+    driver: bridge

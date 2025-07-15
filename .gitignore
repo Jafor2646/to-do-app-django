@@ -1,10 +1,63 @@
-# Dependencies
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 lerna-debug.log*
+.pnpm-debug.log*
 
 # Runtime data
 pids
@@ -61,13 +114,11 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# Environment variables
-.env
-.env.*
-.env.local
+# dotenv environment variable files
 .env.development.local
 .env.test.local
 .env.production.local
+.env.local
 
 # parcel-bundler cache
 .cache
@@ -79,9 +130,11 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
+dist
 
 # Gatsby files
 .cache/
+public
 
 # Vite build output
 dist/
@@ -112,13 +165,8 @@ dist-ssr/
 .yarn/install-state.gz
 .pnp.*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea/
-*.swp
-*.swo
-*~
+# Docker
+.dockerignore
 
 # OS generated files
 .DS_Store
@@ -129,6 +177,16 @@ dist-ssr/
 ehthumbs.db
 Thumbs.db
 
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Deployment
+*.deploy
+*.deployment
+
 # Logs
 logs/
 *.log
@@ -138,12 +196,55 @@ tmp/
 temp/
 .tmp/
 
-# Testing
-.coverage
-
-# Build outputs
+# Production builds
 build/
 dist/
 
-# Local environment files
-*.local
+# Database backups
+*.dump
+*.sql
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+
+# Backup files
+*.bak
+*.backup
+
+# Project-specific exclusions
+# Docker volumes and data
+docker-volumes/
+postgres-data/
+redis-data/
+
+# Production environment files
+.env.production
+.env.staging
+
+# Monitoring and logging
+logs/
+monitoring/
+grafana-data/
+prometheus-data/
+
+# Backup directories
+backups/
+dumps/
+
+# Testing artifacts
+test-results/
+coverage-reports/
+screenshots/
+
+# IDE-specific project files
+.vscode/settings.json
+.vscode/launch.json
+.idea/workspace.xml
+.idea/tasks.xml
+
+# OS-specific temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
