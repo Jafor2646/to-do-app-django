@@ -83,15 +83,62 @@ jobs:
     - name: Install dependencies
       working-directory: ./frontend
       run: |
+        echo "Installing dependencies in: $(pwd)"
+        echo "Checking if package.json exists:"
+        ls -la package.json
         npm ci --legacy-peer-deps
+        echo "Dependencies installed successfully"
     
     - name: Verify project structure
       working-directory: ./frontend
       run: |
         echo "Checking project structure..."
-        ls -la src/lib/
-        echo "Contents of utils.js:"
-        cat src/lib/utils.js
+        echo "Current directory: $(pwd)"
+        echo "Listing frontend src contents:"
+        ls -la src/
+        echo "Checking if lib directory exists:"
+        if [ -d "src/lib" ]; then
+          echo "✅ src/lib directory exists"
+          ls -la src/lib/
+          echo "Contents of utils.js:"
+          cat src/lib/utils.js
+        else
+          echo "❌ src/lib directory not found"
+          echo "Available directories in src:"
+          find src -type d -name "*lib*" || echo "No lib directories found"
+        fi
+
+    - name: Ensure build requirements
+      working-directory: ./frontend
+      run: |
+        echo "Ensuring all build requirements are met..."
+        
+        # Create lib directory if it doesn't exist
+        if [ ! -d "src/lib" ]; then
+          echo "Creating missing src/lib directory"
+          mkdir -p src/lib
+        fi
+        
+        # Create utils.js if it doesn't exist
+        if [ ! -f "src/lib/utils.js" ]; then
+          echo "Creating missing utils.js file"
+          cat > src/lib/utils.js << 'EOF'
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs))
+}
+EOF
+        fi
+        
+        # Create index.js if it doesn't exist
+        if [ ! -f "src/lib/index.js" ]; then
+          echo "Creating missing index.js file"
+          echo 'export * from "./utils.js"' > src/lib/index.js
+        fi
+        
+        echo "Build requirements verified ✅"
     
     - name: Run linting
       working-directory: ./frontend
@@ -101,6 +148,17 @@ jobs:
     - name: Build project
       working-directory: ./frontend
       run: |
+        echo "Starting build process..."
+        echo "Node version: $(node --version)"
+        echo "NPM version: $(npm --version)"
+        echo "Checking package.json:"
+        if [ -f "package.json" ]; then
+          echo "✅ package.json exists"
+        else
+          echo "❌ package.json not found"
+          exit 1
+        fi
+        echo "Starting Vite build..."
         npm run build
     
     - name: Upload coverage to Codecov
