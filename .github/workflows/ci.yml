@@ -112,7 +112,7 @@ jobs:
         rm -rf dist
         rm -rf .vite
         echo "Cache cleared"
-    
+
     - name: Verify project structure
       working-directory: ./frontend
       run: |
@@ -146,14 +146,12 @@ jobs:
         # Create utils.js if it doesn't exist
         if [ ! -f "src/lib/utils.js" ]; then
           echo "Creating missing utils.js file"
-          cat > src/lib/utils.js << 'EOF'
-import { clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs) {
-  return twMerge(clsx(inputs))
-}
-EOF
+          echo 'import { clsx } from "clsx"' > src/lib/utils.js
+          echo 'import { twMerge } from "tailwind-merge"' >> src/lib/utils.js
+          echo '' >> src/lib/utils.js
+          echo 'export function cn(...inputs) {' >> src/lib/utils.js
+          echo '  return twMerge(clsx(inputs))' >> src/lib/utils.js
+          echo '}' >> src/lib/utils.js
         fi
         
         # Create index.js if it doesn't exist
