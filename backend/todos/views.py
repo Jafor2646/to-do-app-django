@@ -43,7 +43,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         elif due_date_filter == 'upcoming':
             queryset = queryset.filter(due_date__gte=date.today(), due_date__lte=date.today() + timedelta(days=7))
         elif due_date_filter == 'overdue':
-            queryset = queryset.filter(due_date__lt=date.today(), status__in=['pending', 'in_progress'])
+            queryset = queryset.filter(due_date__lt=date.today(), due_date__isnull=False, status__in=['pending', 'in_progress'])
         
         # Search functionality
         search = self.request.query_params.get('search')
@@ -78,7 +78,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         completed_tasks = queryset.filter(status='completed').count()
         pending_tasks = queryset.filter(status='pending').count()
         in_progress_tasks = queryset.filter(status='in_progress').count()
-        overdue_tasks = queryset.filter(due_date__lt=date.today(), status__in=['pending', 'in_progress']).count()
+        overdue_tasks = queryset.filter(due_date__lt=date.today(), due_date__isnull=False, status__in=['pending', 'in_progress']).count()
         
         return Response({
             'total_tasks': total_tasks,

@@ -22,33 +22,57 @@ export default function Register() {
     register, 
     handleSubmit, 
     watch,
-    formState: { errors } 
-  } = useForm();
+    reset,
+    clearErrors,
+    formState: { errors, isSubmitted } 
+  } = useForm({
+    mode: 'onSubmit', // Only validate on submit
+    reValidateMode: 'onChange', // Re-validate on change after first submit
+    defaultValues: {
+      first_name: '',
+      last_name: '',
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  });
 
   const password = watch("password");
 
   const onSubmit = async (data) => {
     setLoading(true);
     setError("");
+    clearErrors(); // Clear any previous form errors
+    
+    console.log("Registration data:", data); // Debug log
     
     try {
       // eslint-disable-next-line no-unused-vars
       const { confirmPassword, ...userData } = data;
+      console.log("Sending to API:", userData); // Debug log
+      
       const result = await registerUser(userData);
+      console.log("Registration result:", result); // Debug log
       
       if (result.success) {
         setSuccess(true);
+        reset(); // Reset form on success
         setTimeout(() => {
           navigate("/login");
         }, 2000);
       } else {
-        setError(typeof result.error === 'object' 
-          ? Object.values(result.error).flat().join(', ')
-          : result.error
-        );
+        console.error("Registration error:", result.error); // Debug log
+        const errorMessage = typeof result.error === 'object' 
+          ? Object.entries(result.error)
+              .map(([field, messages]) => `${field}: ${Array.isArray(messages) ? messages.join(', ') : messages}`)
+              .join('\n')
+          : result.error || 'Registration failed';
+        setError(errorMessage);
       }
     } catch (err) {
-      setError("An unexpected error occurred");
+      console.error("Unexpected error:", err); // Debug log
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -110,7 +134,7 @@ export default function Register() {
                       required: "First name is required" 
                     })}
                   />
-                  {errors.first_name && (
+                  {isSubmitted && errors.first_name && (
                     <p className="text-sm text-red-400">{errors.first_name.message}</p>
                   )}
                 </div>
@@ -125,7 +149,7 @@ export default function Register() {
                       required: "Last name is required" 
                     })}
                   />
-                  {errors.last_name && (
+                  {isSubmitted && errors.last_name && (
                     <p className="text-sm text-red-400">{errors.last_name.message}</p>
                   )}
                 </div>
@@ -146,7 +170,7 @@ export default function Register() {
                     }
                   })}
                 />
-                {errors.username && (
+                {isSubmitted && errors.username && (
                   <p className="text-sm text-red-400">{errors.username.message}</p>
                 )}
               </div>
@@ -165,7 +189,7 @@ export default function Register() {
                     }
                   })}
                 />
-                {errors.email && (
+                {isSubmitted && errors.email && (
                   <p className="text-sm text-red-400">{errors.email.message}</p>
                 )}
               </div>
@@ -200,7 +224,7 @@ export default function Register() {
                     )}
                   </Button>
                 </div>
-                {errors.password && (
+                {isSubmitted && errors.password && (
                   <p className="text-sm text-red-400">{errors.password.message}</p>
                 )}
               </div>
@@ -231,7 +255,7 @@ export default function Register() {
                     )}
                   </Button>
                 </div>
-                {errors.confirmPassword && (
+                {isSubmitted && errors.confirmPassword && (
                   <p className="text-sm text-red-400">{errors.confirmPassword.message}</p>
                 )}
               </div>

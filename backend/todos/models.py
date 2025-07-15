@@ -19,7 +19,7 @@ class Task(models.Model):
     description = models.TextField(blank=True)
     status = models.CharField(max_length=15, choices=STATUS, default='pending')
     priority = models.CharField(max_length=10, choices=PRIORITY, default='medium')
-    due_date = models.DateField()
+    due_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     order = models.IntegerField(default=0)

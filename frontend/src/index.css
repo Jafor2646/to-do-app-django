@@ -98,7 +98,25 @@ select:focus {
   border-color: hsl(var(--primary));
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
   background: #ffffff !important;
-  color: #000000 !important;
+}
+
+/* Placeholder styling for better visibility */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important; /* Gray-400 */
+  opacity: 1 !important;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #d1d5db !important; /* Gray-300 */
+  opacity: 0.7 !important;
+}
+
+/* Ensure placeholder disappears when typing */
+input:not(:placeholder-shown)::placeholder,
+textarea:not(:placeholder-shown)::placeholder {
+  opacity: 0 !important;
 }
 
 /* Comprehensive input text color fixes */

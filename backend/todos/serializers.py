@@ -26,6 +26,12 @@ class TaskSerializer(serializers.ModelSerializer):
     
     def validate_due_date(self, value):
         from datetime import date
-        if value < date.today():
+        if value and value < date.today():
             raise serializers.ValidationError("Due date cannot be in the past.")
         return value
+
+    def validate(self, data):
+        # Convert empty string to None for due_date
+        if 'due_date' in data and data['due_date'] == '':
+            data['due_date'] = None
+        return data
