@@ -32,6 +32,7 @@ export default function Register() {
     setError("");
     
     try {
+      // eslint-disable-next-line no-unused-vars
       const { confirmPassword, ...userData } = data;
       const result = await registerUser(userData);
       

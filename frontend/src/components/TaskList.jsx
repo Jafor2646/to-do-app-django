@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { 
   DndContext, 
   closestCenter,
@@ -17,8 +16,7 @@ import TaskCard from "./TaskCard";
 import API from "../api";
 
 export default function TaskList({ tasks, refresh, filters }) {
-  const [draggedTasks, setDraggedTasks] = useState(tasks);
-  
+  // Remove unused state that was causing linting errors
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {

@@ -68,10 +68,41 @@ npm install husky --save-dev
 npx husky install
 ```
 
-### Problem: Legacy Peer Dependencies
+### Problem: Package Lock File Sync Issues
+```
+npm error Invalid: lock file's @dnd-kit/sortable@10.0.0 does not satisfy @dnd-kit/sortable@8.0.0
+npm error `npm ci` can only install packages when your package.json and package-lock.json are in sync
+```
+
+### Solution:
+This happens when package.json versions don't match package-lock.json:
 ```bash
-# Use this flag for installation if you encounter peer dependency conflicts
+cd frontend
+
+# Remove outdated lock file
+rm package-lock.json
+
+# Reinstall with compatible versions
 npm install --legacy-peer-deps
+
+# Verify build works
+npm run build
+```
+
+### Problem: ESLint Configuration Errors
+```
+Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './config' is not defined
+Invalid option '--ext' - perhaps you meant '-c'?
+```
+
+### Solution:
+Update ESLint configuration for newer versions:
+```bash
+# Update package.json scripts
+"lint": "eslint .",
+"lint:fix": "eslint . --fix"
+
+# Fix eslint.config.js to use compatible syntax
 ```
 
 ## 🔄 GitHub Actions CI/CD Issues
