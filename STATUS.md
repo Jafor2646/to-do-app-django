@@ -182,8 +182,26 @@ docker-compose -f docker-compose.prod.yml --profile monitoring up -d
 - ✅ **Form Validation**: Comprehensive client-side validation
 - ✅ **Date Intelligence**: Smart date formatting and overdue detection
 - ✅ **Security**: Rate limiting, CORS, and security headers
-- ✅ **CI/CD**: GitHub Actions pipeline
+- ✅ **CI/CD**: GitHub Actions pipeline with updated security practices
 - ✅ **Monitoring**: Optional Prometheus and Grafana setup
+- ✅ **Troubleshooting**: Comprehensive issue resolution guide
+- ✅ **Version Compatibility**: Node.js 18+ support for broad compatibility
+
+## 🔧 Recent Fixes
+
+### Version Compatibility Issues (Resolved)
+- ✅ **Node.js Compatibility**: Downgraded packages to support Node.js 18+
+- ✅ **Package Dependencies**: Resolved React Router and Vite version conflicts
+- ✅ **Husky Installation**: Removed problematic prepare script
+- ✅ **GitHub Actions**: Updated to latest action versions (v4/v5)
+- ✅ **CodeQL Security**: Updated from deprecated v2 to v3
+- ✅ **SARIF Permissions**: Added proper security-events permissions
+
+### CI/CD Pipeline Improvements
+- ✅ **Action Versions**: Updated all GitHub Actions to latest stable versions
+- ✅ **Permission Management**: Added granular permissions for security scanning
+- ✅ **Build Optimization**: Added --legacy-peer-deps for compatibility
+- ✅ **Error Handling**: Added if: always() for consistent SARIF uploads
 
 ## 🎯 Next Steps
 

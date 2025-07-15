@@ -115,6 +115,26 @@ A modern, feature-rich To-Do application built with Django REST Framework and Re
    ```
    Frontend will be available at `http://localhost:5173`
 
+## ⚠️ System Requirements
+
+- **Node.js**: 18.0.0+ (tested with 18.20.8 and 20.x)
+- **Python**: 3.8+ (recommended: 3.11)
+- **npm**: 8.0.0+
+- **Docker**: 20.0.0+ (optional, for containerized deployment)
+
+### Version Compatibility Notes
+- The project supports Node.js 18+ for broader compatibility
+- All package versions are tested with Node.js 18.20.8
+- For Node.js 20+, you can upgrade to the latest package versions
+- Use `npm install --legacy-peer-deps` if you encounter peer dependency warnings
+
+## 📚 Documentation
+
+- **[API Documentation](docs/API.md)** - Complete API reference with examples
+- **[Deployment Guide](docs/DEPLOYMENT.md)** - Multiple deployment strategies
+- **[Development Guide](docs/DEVELOPMENT.md)** - Setup and contribution guidelines
+- **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)** - Common issues and solutions
+
 ## 📚 API Documentation
 
 The API documentation is automatically generated and available at:
